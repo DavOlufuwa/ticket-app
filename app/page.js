@@ -1,9 +1,9 @@
-import PriorityDisplay from "./(components)/PriorityDisplay";
+
 import TicketCard from "./(components)/TicketCard";
 
 const getTickets = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/Tickets", {
+    const res = await fetch("http://localhost:3000/api/alltickets", {
       cache: "no-store",
     });
     return res.json();
@@ -16,7 +16,7 @@ const Dashboard = async () => {
   const { tickets } = await getTickets();
 
   const uniqueCategories = [
-    ...new Set(tickets.map(({ category }) => category)),
+    ...new Set(tickets?.map(({ category }) => category)),
   ];
 
   return (

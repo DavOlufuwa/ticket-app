@@ -3,9 +3,11 @@ import DeleteBlock from "./DeleteBlock";
 import ProgressDisplay from "./ProgressDisplay";
 import StatusDisplay from "./StatusDisplay";
 import PriorityDisplay from "./PriorityDisplay";
+import Link from "next/link";
 
 const TicketCard = ({ ticket }) => {
   const {
+    _id,
     title,
     description,
     priority,
@@ -35,22 +37,24 @@ const TicketCard = ({ ticket }) => {
       <div className="flex mb-3">
         <PriorityDisplay priority={priority} />
         <div className="ml-auto">
-          <DeleteBlock />
+          <DeleteBlock id={_id} />
         </div>
       </div>
-      <h4>{title}</h4>
-      <hr className="h-px border-0 bg-page mb-2" />
-      <p className="whitespace-pre-wrap">{description}</p>
-      <div className="flex-grow"></div>
-      <div className="flex mt-2">
-        <div className="flex flex-col">
-          <p className="text-xs my-1">{formatTimestamp(createdAt)}</p>
-          <ProgressDisplay progress={progress} />
+      <Link href={`/TicketPage/${_id}`} style={{ display: "contents"}}>
+        <h4>{title}</h4>
+        <hr className="h-px border-0 bg-page mb-2" />
+        <p className="whitespace-pre-wrap">{description}</p>
+        <div className="flex-grow"></div>
+        <div className="flex mt-2">
+          <div className="flex flex-col">
+            <p className="text-xs my-1">{formatTimestamp(createdAt)}</p>
+            <ProgressDisplay progress={progress} />
+          </div>
+          <div className="ml-auto flex items-end">
+            <StatusDisplay status={status} />
+          </div>
         </div>
-        <div className="ml-auto flex items-end">
-          <StatusDisplay status={status} />
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };
