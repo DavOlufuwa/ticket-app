@@ -1,4 +1,5 @@
 
+import { notFound } from "next/navigation";
 import TicketCard from "./(components)/TicketCard";
 
 const getTickets = async () => {
@@ -8,7 +9,7 @@ const getTickets = async () => {
     });
     return res.json();
   } catch (error) {
-    console.log("Failed to get tickets", error);
+    notFound();
   }
 };
 

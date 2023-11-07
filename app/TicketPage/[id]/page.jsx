@@ -22,7 +22,7 @@ const TicketPage = async ({params}) => {
   }
   else {
     updateTicketData = {
-      id : "new",
+      _id : "new",
     }
   }
   return (

@@ -1,8 +1,10 @@
 import Ticket from "@/app/models/Ticket";
 import { NextResponse } from "next/server";
+import connect from "@/db";
 
 export async function GET(request, { params }) {
   try {
+    await connect();
     const { id } = params;
     const ticket = await Ticket.findById(id);
     return NextResponse.json({ ticket }, { status: 200 });
@@ -15,6 +17,7 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
+    await connect();
     const { id } = params;
     await Ticket.findByIdAndDelete(id);
     return NextResponse.json({ message: "Ticket Deleted" }, { status: 200 });
